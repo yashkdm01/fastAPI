@@ -3,16 +3,20 @@ import models
 from database import engine
 from sqlalchemy.orm import Session
 from typing import List
-
 from routers import blog, user
+from routers import authentication
+
 
 
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
 
+app.include_router(authentication.router)
 app.include_router(blog.router)
 app.include_router(user.router)
+
+
 
 
 
